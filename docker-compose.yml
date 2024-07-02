@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongodb_supplier
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin1234@
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  springboot-app:
+    image: supplier_registration:1.0
+    container_name: supplier_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    environment:
+      SPRING_DATA_MONGODB_URI:  mongodb://admin:admin1234@mongodb_supplier:27017/supplier-database
+
+volumes:
+  mongodb_data:
