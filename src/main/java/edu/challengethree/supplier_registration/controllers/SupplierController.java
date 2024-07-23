@@ -17,14 +17,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/supplier-registration")
+@CrossOrigin("*")
 @Validated
 public class SupplierController {
 
     @Autowired
     private SupplierService supplierService;
-
-
 
     @PostMapping("/supplier-register")
     public ResponseEntity<SupplierDTO> registerSupplier(@Valid @RequestBody SupplierCreationDTO supplierCreationDTO, Authentication authentication) {
@@ -38,7 +36,7 @@ public class SupplierController {
         try {
             String userId = ((User) authentication.getPrincipal()).getId();
             SupplierDTO updatedSupplier = supplierService.updateSupplier(id, userId, supplierCreationDTO);
-            return ResponseEntity.ok(updatedSupplier);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedSupplier);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
@@ -48,7 +46,7 @@ public class SupplierController {
     public ResponseEntity<List<SupplierSimplifiedDTO>> getAllSuppliers(Authentication authentication) {
         String userId = ((User) authentication.getPrincipal()).getId();
         List<SupplierSimplifiedDTO> allSuppliers = supplierService.getAllSuppliers(userId);
-        return ResponseEntity.ok(allSuppliers);
+        return ResponseEntity.status(HttpStatus.OK).body(allSuppliers);
     }
 
     @GetMapping("/get-supplier/{id}")
@@ -56,7 +54,7 @@ public class SupplierController {
         try {
             String userId = ((User) authentication.getPrincipal()).getId();
             SupplierDTO supplierDTO = supplierService.getSupplierById(id, userId);
-            return ResponseEntity.ok(supplierDTO);
+            return ResponseEntity.status(HttpStatus.OK).body(supplierDTO);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
@@ -67,7 +65,7 @@ public class SupplierController {
         try {
             String userId = ((User) authentication.getPrincipal()).getId();
             String message = supplierService.deleteSupplier(id, userId);
-            return ResponseEntity.ok(message);
+            return ResponseEntity.status(HttpStatus.OK).body(message);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -78,7 +76,7 @@ public class SupplierController {
         try {
             String userId = ((User) authentication.getPrincipal()).getId();
             SupplierDTO updatedSupplier = supplierService.addPhone(id, userId, phoneNumber);
-            return ResponseEntity.ok(updatedSupplier);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedSupplier);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
@@ -89,7 +87,7 @@ public class SupplierController {
         try {
             String userId = ((User) authentication.getPrincipal()).getId();
             SupplierDTO updatedSupplier = supplierService.removePhone(id, userId, phoneNumber);
-            return ResponseEntity.ok(updatedSupplier);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedSupplier);
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }

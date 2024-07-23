@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Login</title>
+  <!-- Bootstrap 4.6.2 - Install-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <!-- Icons from bootstrap-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- CSS -->
+
+</head>
+<body>
+<main>
+  <div class="card-container">
+    <h4 class="text-center mb-3">Entre na sua conta</h4>
+    <!-- Form from thymeleaf-->
+    <form id="loginForm" th:action="@{/auth/login}" th:object="${authenticationDTO}" method="post">
+
+        <div class="input-group mb-3">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group mb-3">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+        </div>
+      </div>
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary btn-block">Acessar</button>
+      </div>
+      <div class="form-group text-center mt-3" th:if="${loginError}">
+        <div class="alert alert-danger" role="alert">
+          Email ou senha inválidos!
+        </div>
+      </div>
+    </form>
+
+
+  </div>
+
+</main>
+</body>
+</html>

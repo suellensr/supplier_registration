@@ -2,7 +2,6 @@ package edu.challengethree.supplier_registration.controllers;
 
 import edu.challengethree.supplier_registration.DTOs.AuthenticationDTO;
 import edu.challengethree.supplier_registration.DTOs.LoginResponseDTO;
-import edu.challengethree.supplier_registration.DTOs.UserCreationDTO;
 import edu.challengethree.supplier_registration.DTOs.UserDTO;
 import edu.challengethree.supplier_registration.exceptions.DifferentPasswordsException;
 import edu.challengethree.supplier_registration.exceptions.EmailAlreadyRegisteredException;
@@ -15,14 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("auth")
 @Validated
 public class AuthenticationController {
@@ -37,7 +34,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid AuthenticationDTO authenticationDTO) {
+    public ResponseEntity<?> login(@ModelAttribute @Valid AuthenticationDTO authenticationDTO) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(authenticationDTO.getEmail(), authenticationDTO.getPassword());
         var authenticated = this.authenticationManager.authenticate(usernamePassword);
 
@@ -47,9 +44,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid UserCreationDTO userCreationDTO) {
+    public ResponseEntity<?> register(@RequestBody @Valid UserDTO userDTO) {
         try {
-            UserDTO createdUser = userService.createUser(userCreationDTO);
+            UserDTO createdUser = userService.createUser(userDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
         } catch (DifferentPasswordsException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
