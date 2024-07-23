@@ -3,7 +3,6 @@ package edu.challengethree.supplier_registration.controllers;
 import edu.challengethree.supplier_registration.DTOs.AuthenticationDTO;
 import edu.challengethree.supplier_registration.DTOs.LoginResponseDTO;
 import edu.challengethree.supplier_registration.DTOs.UserDTO;
-import edu.challengethree.supplier_registration.exceptions.DifferentPasswordsException;
 import edu.challengethree.supplier_registration.exceptions.EmailAlreadyRegisteredException;
 import edu.challengethree.supplier_registration.model.entities.User;
 import edu.challengethree.supplier_registration.security.TokenService;
@@ -48,8 +47,6 @@ public class AuthenticationController {
         try {
             UserDTO createdUser = userService.createUser(userDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
-        } catch (DifferentPasswordsException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (EmailAlreadyRegisteredException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }

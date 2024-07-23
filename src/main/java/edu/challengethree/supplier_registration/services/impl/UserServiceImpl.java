@@ -1,7 +1,6 @@
 package edu.challengethree.supplier_registration.services.impl;
 
 import edu.challengethree.supplier_registration.DTOs.UserDTO;
-import edu.challengethree.supplier_registration.exceptions.DifferentPasswordsException;
 import edu.challengethree.supplier_registration.exceptions.EmailAlreadyRegisteredException;
 import edu.challengethree.supplier_registration.model.entities.User;
 import edu.challengethree.supplier_registration.repositories.UserRepository;
