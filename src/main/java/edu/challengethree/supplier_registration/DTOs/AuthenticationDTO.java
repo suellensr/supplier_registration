@@ -8,11 +8,11 @@ public class AuthenticationDTO {
     private String email;
     private String password;
 
-    public String getEmail() {
+    public @Email String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@Email String email) {
         this.email = email;
     }
 

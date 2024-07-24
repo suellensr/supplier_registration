@@ -9,11 +9,11 @@ public class UserCreationDTO {
     private String password;
     private String confirmPassword;
 
-    public String getEmail() {
+    public @Email String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@Email String email) {
         this.email = email;
     }
 
