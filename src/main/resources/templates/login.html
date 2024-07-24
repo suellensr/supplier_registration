@@ -1,48 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Login</title>
-  <!-- Bootstrap 4.6.2 - Install-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <!-- Icons from bootstrap-->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <!-- CSS -->
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <!-- Bootstrap 4.6.2 - Install-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- Icons from bootstrap-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<main>
-  <div class="card-container">
-    <h4 class="text-center mb-3">Entre na sua conta</h4>
-    <!-- Form from thymeleaf-->
-    <form id="loginForm" th:action="@{/auth/login}" th:object="${authenticationDTO}" method="post">
+<main class="container">
+    <div class="card-container">
+        <h4 class="text-center mb-3">Entre na sua conta</h4>
+        <!-- Form from thymeleaf-->
+        <form id="loginForm" th:action="@{/auth/login}" method="post">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
+                </div>
+            </div>
+            <div id="login-error" class="alert alert-danger text-center mt-3" role="alert" style="display: none;"></div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary btn-custom">Acessar</button>
+            </div>
 
-        <div class="input-group mb-3">
-          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="input-group mb-3">
-          <span class="input-group-text"><i class="bi bi-lock"></i></span>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Senha" required>
-        </div>
-      </div>
-      <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary btn-block">Acessar</button>
-      </div>
-      <div class="form-group text-center mt-3" th:if="${loginError}">
-        <div class="alert alert-danger" role="alert">
-          Email ou senha inválidos!
-        </div>
-      </div>
-    </form>
-
-
-  </div>
-
+        </form>
+        <p class="text-center mt-3">Não possui conta? <a href="/user-register">Crie uma aqui</a></p>
+    </div>
 </main>
+
+<footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2024 - SSR</p>
+</footer>
+
+<!-- JavaScript files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzS0txlW3eSnGYl1i6VKKIYKK2oSEKC9bB9ZTQe4p6C6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIqQcFAkaeIYQhP5et3Qm2RZMTcBzQGuOU6Q6zI8Rk5j8rd51T3" crossorigin="anonymous"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>
