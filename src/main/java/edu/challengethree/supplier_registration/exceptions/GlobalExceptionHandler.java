@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DifferentPasswordsException.class)
     public ResponseEntity<?> differentPasswordsException(DifferentPasswordsException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorDetails);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorDetails);
     }
 
     @ExceptionHandler(InvalidDocumentException.class)
