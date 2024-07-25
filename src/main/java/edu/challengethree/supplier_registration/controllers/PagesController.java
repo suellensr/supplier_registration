@@ -11,12 +11,6 @@ public class PagesController {
         return "login";
     }
 
-//    @GetMapping("/login")
-//    public String showLoginForm(Model model) {
-//        model.addAttribute("authenticationDTO", new AuthenticationDTO());
-//        return "login";
-//    }
-
     @GetMapping("/user-register")
     public String loadUserRegister() {
         return "user-register";

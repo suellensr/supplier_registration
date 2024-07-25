@@ -25,7 +25,7 @@ $(document).ready(function() {
             error: function(xhr) {
                 var errorMessage = xhr.responseText; // Lida com a resposta de erro como texto simples
                 console.log("Error message: ", errorMessage); // Log para depuração
-                $('#login-error').text(errorMessage).show(); // Certifique-se de que o ID esteja correto
+                $('#login-error').text(errorMessage).show();
             }
         });
     });

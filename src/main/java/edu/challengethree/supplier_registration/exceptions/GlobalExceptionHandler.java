@@ -4,6 +4,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -38,15 +39,21 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(TokenExpiredException.class)
-    public ResponseEntity<?> TokenExpiredException(TokenExpiredException ex, WebRequest request) {
+    public ResponseEntity<?> tokenExpiredException(TokenExpiredException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorDetails);
     }
 
     @ExceptionHandler(JWTVerificationException.class)
-    public ResponseEntity<?> handleJWTVerificationException(JWTVerificationException ex, WebRequest request) {
+    public ResponseEntity<?> jWTVerificationException(JWTVerificationException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorDetails);
+    }
+
+    @ExceptionHandler(WrongAuthenticationException.class)
+    public ResponseEntity<?> wrongAuthenticationException(WrongAuthenticationException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), "Incorrect email or password.", request.getDescription(false));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorDetails);
     }
 
     @ExceptionHandler(Exception.class)

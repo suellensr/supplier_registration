@@ -1,6 +1,8 @@
 package edu.challengethree.supplier_registration.services.impl;
 
+import edu.challengethree.supplier_registration.DTOs.UserCreationDTO;
 import edu.challengethree.supplier_registration.DTOs.UserDTO;
+import edu.challengethree.supplier_registration.exceptions.DifferentPasswordsException;
 import edu.challengethree.supplier_registration.exceptions.EmailAlreadyRegisteredException;
 import edu.challengethree.supplier_registration.model.entities.User;
 import edu.challengethree.supplier_registration.repositories.UserRepository;
@@ -20,13 +22,16 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDTO createUser(UserDTO userDTO) throws EmailAlreadyRegisteredException {
-        if (userRepository.findByEmail(userDTO.getEmail()) != null) {
+    public UserDTO createUser(UserCreationDTO userCreationDTO) throws DifferentPasswordsException, EmailAlreadyRegisteredException {
+        if (userRepository.findByEmail(userCreationDTO.getEmail()) != null) {
             throw new EmailAlreadyRegisteredException("This email is already registered");
         }
+        if (!userCreationDTO.getPassword().equals(userCreationDTO.getConfirmPassword())) {
+            throw new DifferentPasswordsException("Passwords do not match");
+        }
         User user = new User();
-        user.setUsername(userDTO.getEmail());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setUsername(userCreationDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(userCreationDTO.getPassword()));
 
         userRepository.save(user);
 
