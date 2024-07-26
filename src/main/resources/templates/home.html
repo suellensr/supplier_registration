@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <!-- Bootstrap 4.6.2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <!-- Icons from bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+        <div class="navbar-brand d-flex align-items-center">
+      <img src="/images/logo_ME2.png" alt="Logotipo do Mercado Eletrônico">
+      App Suellen
+    </div>
 
+    <div class="d-flex align-items-center">
+      <a class="nav-link" href="/home" >
+        <i class="bi bi-house-door"></i>
+      </a>
+    </div>
+
+    <div class="ml-auto d-flex align-items-center">
+      <a class="nav-link" href="#" id="logout">
+        Logout
+        <i class="bi bi-box-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</nav>
+<div class="container mt-4">
+  <button class="btn btn-primary" id="supplierRegisterBtn">Novo Fornecedor</button>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <!-- ><th>ID</th> <-->
+      <th>Nome do Fornecedor</th>
+      <th>Nome do Contato</th>
+      <th>Email</th>
+      <th>Nº Documento</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody id="supplierTableBody">
+    <!-- Dados dos fornecedores serão carregados aqui -->
+    </tbody>
+  </table>
+</div>
+<!-- JavaScript files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzS0txlW3eSnGYl1i6VKKIYKK2oSEKC9bB9ZTQe4p6C6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIqQcFAkaeIYQhP5et3Qm2RZMTcBzQGuOU6Q6zI8Rk5j8rd51T3" crossorigin="anonymous"></script>
+<script src="/js/home.js"></script>
 </body>
 </html>

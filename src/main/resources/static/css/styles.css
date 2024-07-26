@@ -16,3 +16,40 @@ body {
     border-radius: 0.375rem;
     margin-top: 1rem;
 }
+
+/* Navigation bar-related settings */
+
+.navbar {
+    background-color: #065f69;
+}
+.navbar-brand,
+.nav-link {
+    color: white;
+    font-size: 1rem;
+}
+.navbar-brand img {
+    width: 120px;
+    height: auto;
+    margin-right: 25px;
+}
+.navbar .bi-house-door {
+    font-size: 1.5rem;
+}
+.navbar .bi-box-arrow-right {
+    font-size: 1rem;
+}
+.navbar-brand:hover,
+.nav-link:hover {
+    color: white;
+}
+
+/* Table home settings */
+
+.table {
+    margin-top: 20px;
+    background-color: white;
+}
+.table th, .table td {
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+}
