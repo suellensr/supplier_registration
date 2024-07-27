@@ -28,7 +28,6 @@ function loadSuppliers() {
             data.forEach(supplier => {
                 const supplierRow = `
                     <tr>
-                        <!-- ><td>${supplier.id}</td><-->
                         <td>${supplier.supplierName}</td>
                         <td>${supplier.contactName}</td>
                         <td>${supplier.contactEmail}</td>
@@ -36,8 +35,7 @@ function loadSuppliers() {
                         <td>
                             <a class="btn btn-info btn-sm" href="/view-supplier/${supplier.id}"><i class="bi bi-eye"></i></a>
                             <a class="btn btn-warning btn-sm" href="/supplier-edit/${supplier.id}"><i class="bi bi-pencil"></i></a>
-                            <!-- ><td><button class="btn btn-danger btn-sm" onclick="deleteSupplier(${supplier.id})"></button><-->
-                            <a href="#" id="delete" class="btn btn-danger btn-sm" ><i class="bi bi-trash"></i>
+                            <button class="btn btn-danger btn-sm" onclick="deleteSupplier('${supplier.id}')"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
                 `;
@@ -50,23 +48,25 @@ function loadSuppliers() {
             window.location.href = '/login';
         }
     });
+}
 
-    function deleteSupplier(id) {
-        if (confirm('Você tem certeza que quer deletar este fornecedor?')) {
-            $.ajax({
-                url: `/delete/${id}`,
-                type: 'DELETE',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                success: function () {
-                    alert('Fornecedor deletado com sucesso!');
-                    loadSuppliers(); // Recarregar a lista de fornecedores
-                },
-                error: function (error) {
-                    console.error('Erro ao deletar fornecedor:', error);
-                }
-            });
-        }
+function deleteSupplier(id) {
+    console.log(localStorage.getItem("token"));
+    if (confirm('Você tem certeza que quer deletar este fornecedor?')) {
+        console.log(localStorage.getItem("token"));
+        $.ajax({
+            url: `/delete/${id}`,
+            type: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            success: function () {
+                alert('Fornecedor deletado com sucesso!');
+                loadSuppliers(); // Recarregar a lista de fornecedores
+            },
+            error: function (error) {
+                console.error('Erro ao deletar fornecedor:', error);
+            }
+        });
     }
 }
