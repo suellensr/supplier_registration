@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Supplier</title>
+  <!-- Bootstrap 4.6.2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <!-- Icons from bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#">
+    <img src="/images/mercado_eletronico_logo.png" alt="Logo" style="width: 8%;">
+    APP Suellen
+  </a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#" id="logout">Logout <i class="bi bi-box-arrow-right"></i></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container mt-4">
+  <input type="hidden" id="supplierId" th:value="${supplierId}">
+
+  <div class="supplier-container">
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="bi bi-file-earmark-text"></i> Informações do fornecedor
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="supplierName">Nome do fornecedor</label>
+          <input type="text" class="form-control" id="supplierName" value="${supplier.name}" readonly>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+
+            <label for="personType">Tipo de pessoa</label>
+            <input type="text" class="form-control" id="personType" value="${supplier.personType}" readonly>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="documentNumber">Número do documento</label>
+            <input type="text" class="form-control" id="documentNumber" value="${supplier.documentNumber}" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="activityDescription">Descrição das atividades</label>
+          <textarea class="form-control" id="activityDescription" rows="3" readonly>${supplier.activityDescription}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="bi bi-house"></i> Endereço
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="zipCode">CEP</label>
+          <input type="text" class="form-control" id="zipCode" value="${supplier.address.zipCode}" readonly>
+        </div>
+        <div class="form-group">
+          <label for="street">Logradouro</label>
+          <input type="text" class="form-control" id="street" value="${supplier.address.street}" readonly>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="number">Número</label>
+            <input type="text" class="form-control" id="number" value="${supplier.address.number}" readonly>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="complement">Complemento</label>
+            <input type="text" class="form-control" id="complement" value="${supplier.address.complement}" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="neighborhood">Bairro</label>
+            <input type="text" class="form-control" id="neighborhood" value="${supplier.address.neighborhood}" readonly>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="city">Localidade</label>
+            <input type="text" class="form-control" id="city" value="${supplier.address.city}" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="state">UF</label>
+            <input type="text" class="form-control" id="state" value="${supplier.address.state}" readonly>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="country">País</label>
+            <input type="text" class="form-control" id="country" value="${supplier.address.country}" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="bi bi-telephone"></i> Contato do fornecedor
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="contactName">Nome do contato</label>
+          <input type="text" class="form-control" id="contactName" value="${supplier.contactName}" readonly>
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">E-mail do contato</label>
+          <input type="email" class="form-control" id="contactEmail" value="${supplier.contactEmail}" readonly>
+        </div>
+        <div class="form-group">
+          <label for="contactPhones">Telefones</label>
+          <div id="contactPhones">
+            <!-- Aqui a lista de telefones será carregada -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-warning mr-2" type="button" onclick="window.location.href='/edit-supplier/${supplier.id}'">Editar</button>
+      <button class="btn btn-danger mr-2" type="button" onclick="deleteSupplier(${supplier.id})">Deletar</button>
+      <button class="btn btn-info" type="button" onclick="window.location.href='/home'">Voltar</button>
+    </div>
+  </div>
+</div>
+<!-- JavaScript files -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBogGzS0txlW3eSnGYl1i6VKKIYKK2oSEKC9bB9ZTQe4p6C6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIqQcFAkaeIYQhP5et3Qm2RZMTcBzQGuOU6Q6zI8Rk5j8rd51T3" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<script src="/js/view-supplier.js"></script>
+</body>
+</html>

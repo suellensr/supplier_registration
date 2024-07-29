@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Configuration
 @EnableWebSecurity
@@ -29,8 +30,8 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests(authorize -> authorize
-                        .antMatchers("/css/**", "/js/**", "/templates/**").permitAll()
-                        .antMatchers(HttpMethod.GET, "/login", "/user-register", "/home").permitAll()
+                        .antMatchers("/css/**", "/js/**", "/images/**", "/templates/**").permitAll()
+                        .antMatchers(HttpMethod.GET, "/login", "/user-register", "/home", "/view-supplier/{id}, /supplier-register").permitAll()
                         .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

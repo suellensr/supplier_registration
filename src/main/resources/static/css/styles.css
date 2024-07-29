@@ -53,3 +53,19 @@ body {
     border-top: none;
     border-bottom: 1px solid #dee2e6;
 }
+
+/*view-supplier*/
+.supplier-container {
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.card {
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+.card-header {
+    font-weight: bold;
+}
