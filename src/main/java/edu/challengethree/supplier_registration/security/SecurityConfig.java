@@ -29,10 +29,10 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests(authorize -> authorize
-                        //.antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        //.antMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        //.anyRequest().authenticated())
-                        .anyRequest().permitAll())
+                        .antMatchers("/css/**", "/js/**", "/templates/**").permitAll()
+                        .antMatchers(HttpMethod.GET, "/login", "/user-register", "/home").permitAll()
+                        .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
+                        .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
