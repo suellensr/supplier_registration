@@ -38,6 +38,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorDetails);
     }
 
+    @ExceptionHandler(SupplierAlreadyRegisteredException.class)
+    public ResponseEntity<?> supplierAlreadyRegisteredException(SupplierAlreadyRegisteredException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorDetails);
+    }
+
     @ExceptionHandler(TokenExpiredException.class)
     public ResponseEntity<?> tokenExpiredException(TokenExpiredException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));

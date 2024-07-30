@@ -52,6 +52,21 @@ public class TokenService {
         }
     }
 
+    public boolean validateToken(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+
+            JWT.require(algorithm)
+                    .withIssuer("supplier-registration-api")
+                    .build()
+                    .verify(token);
+            return true;
+        } catch (JWTVerificationException ex) {
+            System.out.println("Token verification failed: " + ex.getMessage());
+            return false;
+        }
+    }
+
     private Instant generateExpirateDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }

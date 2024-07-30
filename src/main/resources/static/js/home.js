@@ -1,6 +1,14 @@
 $(document).ready(function() {
-    // Carregar fornecedores ao carregar a página
-    loadSuppliers();
+    // Verificar o token antes de carregar a página
+    validateToken(function(isValid) {
+        if (isValid) {
+            loadSuppliers();
+        } else {
+            alert("Sessão expirada ou inválida. Por favor, faça login novamente.");
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+        }
+    });
 
     // Botão de logout
     $('#logout').on('click', function() {
@@ -13,6 +21,22 @@ $(document).ready(function() {
         window.location.href = '/supplier-register';
     });
 });
+
+function validateToken(callback) {
+    $.ajax({
+        url: '/auth/validate-token',
+        type: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        success: function(response) {
+            callback(true); // Token válido
+        },
+        error: function(error) {
+            callback(false); // Token inválido ou expirado
+        }
+    });
+}
 
 function loadSuppliers() {
     $.ajax({
@@ -44,8 +68,7 @@ function loadSuppliers() {
         },
         error: function(error) {
             console.error('Erro ao carregar fornecedores:', error);
-            localStorage.removeItem('token');
-            window.location.href = '/login';
+            //window.location.href = '/login'; //Página de erros
         }
     });
 }

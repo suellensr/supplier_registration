@@ -1,15 +1,39 @@
 $(document).ready(function() {
+    // Verificar o token antes de carregar a página
+    validateToken(function(isValid) {
+        if (isValid) {
+            loadSupplierDetails();
+
+        } else {
+            alert("Sessão expirada ou inválida. Por favor, faça login novamente.");
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+        }
+    });
+
     // Botão de logout
     $('#logout').on('click', function() {
         localStorage.removeItem('token');
         window.location.href = '/login';
     });
-
-    // Carregar dados do fornecedor
-    loadSupplierDetails();
-
-
 });
+
+function validateToken(callback) {
+    $.ajax({
+        url: '/auth/validate-token',
+        type: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        success: function(response) {
+            callback(true); // Token válido
+        },
+        error: function(error) {
+            console.error('Token validation error:', error); // Adicione um log para depuração
+            callback(false); // Token inválido ou expirado
+        }
+    });
+}
 
 function loadSupplierDetails() {
     const supplierId = $('#supplierId').val();
@@ -49,8 +73,7 @@ function loadSupplierDetails() {
         },
         error: function() {
             alert('Erro ao carregar detalhes do fornecedor.');
-            localStorage.removeItem('token');
-            window.location.href = '/login';
+            window.location.href = '/home';
         }
     });
 }

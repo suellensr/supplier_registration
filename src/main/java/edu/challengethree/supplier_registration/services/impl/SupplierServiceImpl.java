@@ -4,6 +4,7 @@ import edu.challengethree.supplier_registration.DTOs.SupplierCreationDTO;
 import edu.challengethree.supplier_registration.DTOs.SupplierDTO;
 import edu.challengethree.supplier_registration.DTOs.SupplierSimplifiedDTO;
 import edu.challengethree.supplier_registration.exceptions.ResourceNotFoundException;
+import edu.challengethree.supplier_registration.exceptions.SupplierAlreadyRegisteredException;
 import edu.challengethree.supplier_registration.model.entities.Supplier;
 import edu.challengethree.supplier_registration.repositories.SupplierRepository;
 import edu.challengethree.supplier_registration.services.interfaces.SupplierService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
@@ -23,6 +25,13 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public SupplierDTO createSupplier(SupplierCreationDTO supplierCreationDTO, String userId) {
+        String documentNumber = supplierCreationDTO.getDocumentNumber();
+
+        Optional<Supplier> existingSupplier = supplierRepository.findByDocumentNumber(documentNumber);
+        if (existingSupplier.isPresent()) {
+            throw new SupplierAlreadyRegisteredException("Este fornecedor já está cadastrado.");
+        }
+
         Supplier supplier = SupplierMapper.supplierCreationDTOToSupplier(supplierCreationDTO, userId);
         supplierRepository.save(supplier);
 

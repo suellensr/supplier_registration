@@ -20,12 +20,17 @@ body {
 /* Navigation bar-related settings */
 
 .navbar {
-    background-color: #065f69;
+    background-color: #095e65;
+    height: 55px; /* Define a altura da barra de navegação */
+    display: flex;
+    align-items: center; /* Alinha os itens verticalmente no centro */
 }
 .navbar-brand,
 .nav-link {
     color: white;
     font-size: 1rem;
+    display: flex;
+    align-items: center; /* Alinha o logo e o texto verticalmente */
 }
 .navbar-brand img {
     width: 120px;

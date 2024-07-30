@@ -19,6 +19,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -60,5 +61,23 @@ public class AuthenticationController {
         } catch (EmailAlreadyRegisteredException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
+    }
+
+    @PostMapping("/validate-token")
+    public ResponseEntity<String> validateToken(HttpServletRequest request) {
+        String token = recoverToken(request); // Recupere o token do cabeçalho da requisição
+        if (token != null && tokenService.validateToken(token)) {
+            return ResponseEntity.ok("Token is valid");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
+        }
+    }
+
+    private String recoverToken(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            return authHeader.substring(7); // Remove "Bearer " do início do token
+        }
+        return null;
     }
 }

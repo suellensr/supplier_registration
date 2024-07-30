@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface SupplierRepository extends MongoRepository<Supplier, String> {
     List<Supplier> findAllByUserId(String userId);
     Optional<Supplier> findByIdAndUserId(String id, String userId);
+    Optional<Supplier> findByDocumentNumber(String documentNumber);
 }
 

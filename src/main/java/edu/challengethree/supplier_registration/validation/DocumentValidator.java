@@ -16,12 +16,15 @@ public class DocumentValidator implements ConstraintValidator<ValidDocument, Sup
 
     @Override
     public boolean isValid(SupplierCreationDTO supplierCreationDTO, ConstraintValidatorContext context) {
+        String documentNumber = supplierCreationDTO.getDocumentNumber()
+                                .replaceAll("\\D", ""); // Remove all non-numeric characters
+
         if (supplierCreationDTO.getPersonType() == PersonType.INDIVIDUAL) {
-            if (!isValidCPF(supplierCreationDTO.getDocumentNumber())) {
+            if (!isValidCPF(documentNumber)) {
                 throw new InvalidDocumentException("Invalid CPF");
             }
         } else if (supplierCreationDTO.getPersonType() == PersonType.COMPANY) {
-            if (!isValidCNPJ(supplierCreationDTO.getDocumentNumber())) {
+            if (!isValidCNPJ(documentNumber)) {
                 throw new InvalidDocumentException("Invalid CNPJ");
             }
         }
