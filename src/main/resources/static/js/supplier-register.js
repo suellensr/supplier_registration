@@ -1,9 +1,7 @@
 $(document).ready(function() {
     // Verificar o token antes de carregar a página
     validateToken(function(isValid) {
-        if (isValid) {
-            console.log('Token válido!')
-        } else {
+        if (!isValid) {
             alert("Sessão expirada ou inválida. Por favor, faça login novamente.");
             localStorage.removeItem('token');
             window.location.href = '/login';
@@ -31,7 +29,7 @@ $(document).ready(function() {
         let phoneInput = `
             <div class="input-group mb-2">
                 <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                <input type="text" class="form-control phone-input" name="phones[]" placeholder="+00 (00) 0000-0000">
+                <input type="text" class="form-control phone-input" name="phones[]" data-type="landline" placeholder="+00 (00) 0000-0000">
                 <div class="input-group-append">
                    <button class="btn btn-danger remove-phone" type="button"><i class="bi bi-trash"></i></button>
                 </div>
@@ -46,7 +44,7 @@ $(document).ready(function() {
         let phoneInput = `
             <div class="input-group mb-2">
                 <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                <input type="text" class="form-control phone-input" name="phones[]" placeholder="+00 (00) 00000-0000">
+                <input type="text" class="form-control phone-input" name="phones[]" data-type="mobile" placeholder="+00 (00) 00000-0000">
                 <div class="input-group-append">
                    <button class="btn btn-danger remove-phone" type="button"><i class="bi bi-trash"></i></button>
                 </div>
@@ -175,23 +173,18 @@ function applyDocumentMask() {
     });
 }
 
+// Função para aplicar a máscara com base no tipo de telefone
 function applyPhoneMasks() {
-    // Seleciona todos os inputs de telefone
-    $('#contactPhones input').each(function() {
-        // Aplica a máscara padrão
-        $(this).mask('+00 (00) 00000-0000');
+    $('#contactPhones input.phone-input').each(function() {
+        // Remove a máscara existente
+        $(this).unmask();
 
-        // Evento de input para ajustar a máscara conforme o usuário digita
-        $(this).on('input', function() {
-            var phoneValue = $(this).val();
-            console.log(phoneValue);
-            var cleanedPhone = phoneValue.replace(/\D/g, '');
-
-            if (cleanedPhone.length === 13) {
-                $(this).mask('+00 (00) 00000-0000');
-            } else if (cleanedPhone.length === 12) {
-                $(this).mask('+00 (00) 0000-0000');
-            }
-        });
+        // Aplica a máscara com base no atributo data-type do input
+        var type = $(this).data('type');
+        if (type === 'landline') {
+            $(this).mask('+00 (00) 0000-0000');
+        } else if (type === 'mobile') {
+            $(this).mask('+00 (00) 00000-0000');
+        }
     });
 }

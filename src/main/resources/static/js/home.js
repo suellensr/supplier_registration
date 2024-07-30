@@ -1,14 +1,14 @@
 $(document).ready(function() {
     // Verificar o token antes de carregar a página
     validateToken(function(isValid) {
-        if (isValid) {
-            loadSuppliers();
-        } else {
+        if (!isValid) {
             alert("Sessão expirada ou inválida. Por favor, faça login novamente.");
             localStorage.removeItem('token');
             window.location.href = '/login';
         }
     });
+
+    loadSuppliers();
 
     // Botão de logout
     $('#logout').on('click', function() {

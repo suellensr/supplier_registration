@@ -1,15 +1,14 @@
 $(document).ready(function() {
     // Verificar o token antes de carregar a página
     validateToken(function(isValid) {
-        if (isValid) {
-            loadSupplierDetails();
-
-        } else {
+        if (!isValid) {
             alert("Sessão expirada ou inválida. Por favor, faça login novamente.");
             localStorage.removeItem('token');
             window.location.href = '/login';
         }
     });
+
+    loadSupplierDetails();
 
     // Botão de logout
     $('#logout').on('click', function() {
@@ -112,13 +111,10 @@ function applyPhoneMasks() {
 
         if (cleanedPhone.length === 13) {
             $(this).mask('+00 (00) 00000-0000');
-            console.log('11', cleanedPhone);
         } else if (cleanedPhone.length === 12) {
             $(this).mask('+00 (00) 0000-0000');
-            console.log('10', cleanedPhone);
         } else {
             $(this).unmask();
-            console.log('nenhum dos casos');
         }
     });
 }
