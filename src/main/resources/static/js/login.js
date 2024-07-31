@@ -20,7 +20,6 @@ $(document).ready(function() {
                 $('#login-error').hide();
                 // Redireciona para a página principal ou dashboard
                 window.location.href = '/home';
-                alert('Login bem-sucedido!'); // Alerta em caso de sucesso
             },
             error: function(xhr) {
                 var errorMessage = xhr.responseText; // Lida com a resposta de erro como texto simples

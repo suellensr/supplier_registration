@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests(authorize -> authorize
                         .antMatchers("/css/**", "/js/**", "/images/**", "/templates/**").permitAll()
-                        .antMatchers(HttpMethod.GET, "/login", "/user-register", "/home", "/view-supplier/{id}", "/supplier-register").permitAll()
+                        .antMatchers(HttpMethod.GET, "/login", "/user-register", "/home", "/view-supplier/{id}", "/supplier-register", "/edit-supplier/{id}").permitAll()
                         .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
