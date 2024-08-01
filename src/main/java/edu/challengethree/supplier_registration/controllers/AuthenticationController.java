@@ -6,7 +6,6 @@ import edu.challengethree.supplier_registration.DTOs.UserCreationDTO;
 import edu.challengethree.supplier_registration.DTOs.UserDTO;
 import edu.challengethree.supplier_registration.exceptions.DifferentPasswordsException;
 import edu.challengethree.supplier_registration.exceptions.EmailAlreadyRegisteredException;
-import edu.challengethree.supplier_registration.exceptions.WrongAuthenticationException;
 import edu.challengethree.supplier_registration.model.entities.User;
 import edu.challengethree.supplier_registration.security.TokenService;
 import edu.challengethree.supplier_registration.services.interfaces.UserService;
