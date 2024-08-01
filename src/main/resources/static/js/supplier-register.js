@@ -96,6 +96,9 @@ $(document).ready(function() {
         }
     });
 
+    //Parei aqui
+
+
     // Salvar registro
     $('#supplierForm').on('submit', function(event) {
         event.preventDefault(); // Evita o comportamento padrão de submissão do formulário
@@ -146,6 +149,12 @@ $(document).ready(function() {
     // Cancelar redirecionamento
     $('#cancel').on('click', function() {
         window.location.href = '/home'; // Voltar para a Home
+    });
+
+    // Botão de logout
+    $('#logout').on('click', function() {
+        localStorage.removeItem('token');
+        window.location.href = '/login';
     });
 });
 

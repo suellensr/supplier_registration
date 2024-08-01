@@ -35,7 +35,9 @@
     </div>
 </nav>
 <div class="container mt-4">
-    <form id="supplierForm" action="/supplier-register" method="post">
+    <input type="hidden" id="supplierId" th:value="${supplierId}">
+
+    <form id="supplierForm" method="post">
         <div class="supplier-container">
             <div class="card mb-3">
                 <div class="card-header">
@@ -135,7 +137,7 @@
                                     Adicionar Celular
                                 </button>
                             </div>
-                            <div class="input-group mb-2">
+                            <div class="input-group mt-2 mb-2">
                                 <span class="input-group-text"><i class="bi bi-phone"></i></span>
                                 <input type="text" class="form-control phone-input" name="phones[]" data-type="mobile" placeholder="+00 (00) 00000-0000">
                                 <div class="input-group-append">
@@ -148,8 +150,9 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <button class="btn btn-info mr-2" type="submit" id="submit">Salvar</button>
-                <button class="btn btn-danger" type="button" id="cancel">Cancelar</button>
+                <button class="btn btn-warning mr-2" type="submit" id="submit">Salvar</button>
+                <button class="btn btn-danger mr-2" type="button" id="cancel">Cancelar</button>
+                <button class="btn btn-info" type="button" onclick="window.location.href='/home'">Voltar</button>
             </div>
         </div>
     </form>
@@ -159,7 +162,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-
 <script src="/js/edit-supplier.js"></script>
 </body>
 </html>

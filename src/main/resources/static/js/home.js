@@ -58,7 +58,7 @@ function loadSuppliers() {
                         <td>${supplier.documentNumber}</td>
                         <td>
                             <a class="btn btn-info btn-sm" href="/view-supplier/${supplier.id}"><i class="bi bi-eye"></i></a>
-                            <a class="btn btn-warning btn-sm" href="/supplier-edit/${supplier.id}"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-warning btn-sm" href="/edit-supplier/${supplier.id}"><i class="bi bi-pencil"></i></a>
                             <button class="btn btn-danger btn-sm" onclick="deleteSupplier('${supplier.id}')"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
