@@ -62,6 +62,4 @@ public class AuthorizationServiceImpTest {
                 .isInstanceOf(UsernameNotFoundException.class)
                 .hasMessageContaining("User not found");
     }
-
-
 }
