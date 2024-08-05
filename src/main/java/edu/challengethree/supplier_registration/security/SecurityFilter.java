@@ -26,7 +26,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = recoverToken(request);  //recupera o token da requisição
+        String token = recoverToken(request);  // Recover Requisition Token
         if (token != null) {
             String userId = tokenService.validateTokenAndGetUserId(token);
             if (userId != null && !userId.isEmpty()) {

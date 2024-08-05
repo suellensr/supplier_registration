@@ -64,7 +64,7 @@ public class AuthenticationController {
 
     @PostMapping("/validate-token")
     public ResponseEntity<String> validateToken(HttpServletRequest request) {
-        String token = recoverToken(request); // Recupere o token do cabeçalho da requisição
+        String token = recoverToken(request); // Recover the token from requisition header
         if (token != null && tokenService.validateToken(token)) {
             return ResponseEntity.ok("Token is valid");
         } else {
@@ -75,7 +75,7 @@ public class AuthenticationController {
     private String recoverToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            return authHeader.substring(7); // Remove "Bearer " do início do token
+            return authHeader.substring(7); // Remove "Bearer " from the beginning of the token
         }
         return null;
     }
