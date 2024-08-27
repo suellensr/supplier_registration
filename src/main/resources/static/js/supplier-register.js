@@ -138,9 +138,9 @@ $(document).ready(function() {
                 window.location.href = '/home'; // Voltar para a Home
             },
             error: function(xhr) {
-                console.log()
-                errorMessage = xhr.responseJSON.message;
-                console.log("Error message: ", errorMessage); // Log para depuração
+                // Lidar com erros de resposta do servidor
+                const errorResponse = xhr.responseJSON; // Obtém a resposta JSON com a mensagem de erro
+                const errorMessage = errorResponse ? errorResponse.message : 'Ocorreu um erro inesperado';
                 alert('Erro ao cadastrar fornecedor: ' + errorMessage);
             }
         });

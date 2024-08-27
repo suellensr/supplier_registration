@@ -28,7 +28,7 @@ $(document).ready(function() {
         let phoneInput = `
             <div class="input-group mb-2">
                 <span class="input-group-text"><i class="bi bi-telephone"></i></span>
-                <input type="text" class="form-control phone-input" name="phones[]" data-type="landline" placeholder="+00 (00) 0000-0000">
+                <input type="text" class="form-control phone-input" name="phones[]" data-type="landline" placeholder="+00 (00) 0000-0000" required>
                 <div class="input-group-append">
                    <button class="btn btn-danger remove-phone" type="button"><i class="bi bi-trash"></i></button>
                 </div>
@@ -43,7 +43,7 @@ $(document).ready(function() {
         let phoneInput = `
             <div class="input-group mb-2">
                 <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                <input type="text" class="form-control phone-input" name="phones[]" data-type="mobile" placeholder="+00 (00) 00000-0000">
+                <input type="text" class="form-control phone-input" name="phones[]" data-type="mobile" placeholder="+00 (00) 00000-0000" required>
                 <div class="input-group-append">
                    <button class="btn btn-danger remove-phone" type="button"><i class="bi bi-trash"></i></button>
                 </div>
@@ -128,6 +128,7 @@ $(document).ready(function() {
     // Botão de logout
     $('#cancel').on('click', function() {
         loadSupplierDetails();
+        applyDocumentMask()
     });
 
 

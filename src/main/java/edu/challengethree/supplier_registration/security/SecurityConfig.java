@@ -27,9 +27,18 @@ public class SecurityConfig {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .exceptionHandling()
+                //If the user is not authenticated, redirect to the login page
+                .authenticationEntryPoint((request, response, authException) ->
+                        response.sendRedirect("/login"))
+                //If the user does not have permission to access the page, redirect to the home page.
+                //FOR NOW, it's useless, because I don’t have roles defined
+                .accessDeniedHandler((request, response, accessDeniedException) ->
+                        response.sendRedirect("/home"))
+                .and()
                 .authorizeRequests(authorize -> authorize
                         .antMatchers("/css/**", "/js/**", "/images/**", "/templates/**").permitAll()
-                        .antMatchers(HttpMethod.GET, "/login", "/user-register", "/home", "/view-supplier/{id}", "/supplier-register", "/edit-supplier/{id}").permitAll()
+                        .antMatchers(HttpMethod.GET, "/","/login", "/user-register", "/home", "/view-supplier/{id}", "/supplier-register", "/edit-supplier/{id}").permitAll()
                         .antMatchers(HttpMethod.POST, "/auth/login", "/auth/register").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

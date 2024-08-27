@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class PagesController {
 
+    @GetMapping("/")
+    public String redirectIndexToLogin() { return "redirect:/login"; }
+
     @GetMapping("/login")
     public String loadLogin() {
         return "login";

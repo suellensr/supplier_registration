@@ -4,7 +4,10 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -60,6 +63,20 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> wrongAuthenticationException(WrongAuthenticationException ex, WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), "Incorrect email or password.", request.getDescription(false));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorDetails);
+    }
+
+    @ExceptionHandler(PageNotFoundException.class)
+    public ResponseEntity<?> pageNotFoundException(PageNotFoundException ex, WebRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication(); //Spring Security Class that returns user authenticated informations
+        ErrorDetails errorDetails;
+
+        if (auth == null || !auth.isAuthenticated() || auth instanceof AnonymousAuthenticationToken) {
+            errorDetails = new ErrorDetails(new Date(), "Not Found: Please log in.", request.getDescription(false));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorDetails);
+        } else {
+            errorDetails = new ErrorDetails(new Date(), "Page Not Found: Redirecting to home.", request.getDescription(false));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDetails);
+        }
     }
 
     @ExceptionHandler(Exception.class)

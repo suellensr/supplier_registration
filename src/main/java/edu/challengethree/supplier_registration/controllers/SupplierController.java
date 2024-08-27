@@ -3,7 +3,9 @@ package edu.challengethree.supplier_registration.controllers;
 import edu.challengethree.supplier_registration.DTOs.SupplierCreationDTO;
 import edu.challengethree.supplier_registration.DTOs.SupplierDTO;
 import edu.challengethree.supplier_registration.DTOs.SupplierSimplifiedDTO;
+import edu.challengethree.supplier_registration.exceptions.InvalidDocumentException;
 import edu.challengethree.supplier_registration.exceptions.ResourceNotFoundException;
+import edu.challengethree.supplier_registration.exceptions.SupplierAlreadyRegisteredException;
 import edu.challengethree.supplier_registration.model.entities.User;
 import edu.challengethree.supplier_registration.services.interfaces.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,10 @@ public class SupplierController {
     private SupplierService supplierService;
 
     @PostMapping("/supplier-register")
-    public ResponseEntity<SupplierDTO> registerSupplier(@Valid @RequestBody SupplierCreationDTO supplierCreationDTO, Authentication authentication) {
-        String userId = ((User) authentication.getPrincipal()).getId();
-        SupplierDTO createdSupplier = supplierService.createSupplier(supplierCreationDTO,userId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdSupplier);
+    public ResponseEntity<?> registerSupplier(@Valid @RequestBody SupplierCreationDTO supplierCreationDTO, Authentication authentication) {
+            String userId = ((User) authentication.getPrincipal()).getId();
+            SupplierDTO createdSupplier = supplierService.createSupplier(supplierCreationDTO,userId);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdSupplier);
     }
 
     @PutMapping("/supplier-update/{id}")

@@ -46,24 +46,24 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="supplierName">Nome do fornecedor</label>
-                        <input type="text" class="form-control" id="supplierName" name="supplierName">
+                        <input type="text" class="form-control" id="supplierName" name="supplierName" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="personType">Tipo de pessoa</label>
-                            <select class="form-control" id="personType" name="personType">
+                            <select class="form-control" id="personType" name="personType" required>
                                 <option value="COMPANY">Jurídica</option>
                                 <option value="INDIVIDUAL">Física</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="documentNumber">Número do documento</label>
-                            <input type="text" class="form-control" id="documentNumber" name="documentNumber">
+                            <input type="text" class="form-control" id="documentNumber" name="documentNumber" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="activityDescription">Descrição das atividades</label>
-                        <textarea class="form-control" id="activityDescription" name="activityDescription" rows="3"></textarea>
+                        <textarea class="form-control" id="activityDescription" name="activityDescription" rows="5" required></textarea>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="cep">CEP</label>
-                        <input type="text" class="form-control" id="cep" name="cep">
+                        <input type="text" class="form-control" id="cep" name="cep" required>
                     </div>
                     <div class="form-group">
                         <label for="logradouro">Logradouro</label>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="pais">País</label>
-                            <input type="text" class="form-control" id="pais" name="pais">
+                            <input type="text" class="form-control" id="pais" name="pais" readonly>
                         </div>
                     </div>
                 </div>
@@ -120,11 +120,11 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="contactName">Nome do contato</label>
-                        <input type="text" class="form-control" id="contactName" name="contactName">
+                        <input type="text" class="form-control" id="contactName" name="contactName" required>
                     </div>
                     <div class="form-group">
                         <label for="contactEmail">E-mail do contato</label>
-                        <input type="email" class="form-control" id="contactEmail" name="contactEmail">
+                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required>
                     </div>
                     <div class="form-group">
                         <label for="contactPhones">Telefones</label>
@@ -139,7 +139,7 @@
                             </div>
                             <div class="input-group mt-2 mb-2">
                                 <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                                <input type="text" class="form-control phone-input" name="phones[]" data-type="mobile" placeholder="+00 (00) 00000-0000">
+                                <input type="text" class="form-control phone-input" name="phones[]" data-type="mobile" placeholder="+00 (00) 00000-0000" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-danger remove-phone" type="button"><i class="bi bi-trash"></i></button>
                                 </div>

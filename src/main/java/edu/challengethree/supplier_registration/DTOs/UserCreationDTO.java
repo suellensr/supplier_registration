@@ -1,12 +1,16 @@
 package edu.challengethree.supplier_registration.DTOs;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 public class UserCreationDTO {
 
     @Email
+    @NotEmpty
     private String email;
+    @NotEmpty
     private String password;
+    @NotEmpty
     private String confirmPassword;
 
     public @Email String getEmail() {

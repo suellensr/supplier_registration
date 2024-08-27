@@ -3,7 +3,9 @@ package edu.challengethree.supplier_registration.DTOs;
 import edu.challengethree.supplier_registration.model.enums.PersonType;
 import edu.challengethree.supplier_registration.validation.ValidDocument;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -11,53 +13,54 @@ import java.util.List;
 @ValidDocument
 public class SupplierCreationDTO {
 
-    @NotNull
+    @NotEmpty
     private String supplierName;
 
-    @NotNull
+    @NotEmpty
     private String contactName;
 
     @Email
-    @NotNull
+    @NotEmpty
     private String contactEmail;
 
     @NotNull
     private PersonType personType;
 
-    @NotNull
+    @NotEmpty
     private String documentNumber;
 
-    @NotNull
+    @NotEmpty
     private List<String> phoneNumbers;
 
+    @Valid
     @NotNull
     private AddressDTO addressDTO;
 
     @Size(min = 1, max = 50000)
-    @NotNull
+    @NotEmpty
     private String activityDescription;
 
-    public @NotNull String getSupplierName() {
+    public @NotEmpty String getSupplierName() {
         return supplierName;
     }
 
-    public void setSupplierName(@NotNull String supplierName) {
+    public void setSupplierName(@NotEmpty String supplierName) {
         this.supplierName = supplierName;
     }
 
-    public @NotNull String getContactName() {
+    public @NotEmpty String getContactName() {
         return contactName;
     }
 
-    public void setContactName(@NotNull String contactName) {
+    public void setContactName(@NotEmpty String contactName) {
         this.contactName = contactName;
     }
 
-    public @NotNull String getContactEmail() {
+    public @NotEmpty String getContactEmail() {
         return contactEmail;
     }
 
-    public void setContactEmail(@NotNull String contactEmail) {
+    public void setContactEmail(@NotEmpty String contactEmail) {
         this.contactEmail = contactEmail;
     }
 
@@ -69,35 +72,35 @@ public class SupplierCreationDTO {
         this.personType = personType;
     }
 
-    public @NotNull String getDocumentNumber() {
+    public @NotEmpty String getDocumentNumber() {
         return documentNumber;
     }
 
-    public void setDocumentNumber(@NotNull String documentNumber) {
+    public void setDocumentNumber(@NotEmpty String documentNumber) {
         this.documentNumber = documentNumber;
     }
 
-    public @NotNull List<String> getPhoneNumbers() {
+    public @NotEmpty List<String> getPhoneNumbers() {
         return phoneNumbers;
     }
 
-    public void setPhoneNumbers(@NotNull List<String> phoneNumbers) {
+    public void setPhoneNumbers(@NotEmpty List<String> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
     }
 
-    public @NotNull AddressDTO getAddressDTO() {
+    public @Valid AddressDTO getAddressDTO() {
         return addressDTO;
     }
 
-    public void setAddressDTO(@NotNull AddressDTO addressDTO) {
+    public void setAddressDTO(@Valid AddressDTO addressDTO) {
         this.addressDTO = addressDTO;
     }
 
-    public @NotNull String getActivityDescription() {
+    public @NotEmpty String getActivityDescription() {
         return activityDescription;
     }
 
-    public void setActivityDescription(@NotNull String activityDescription) {
+    public void setActivityDescription(@NotEmpty String activityDescription) {
         this.activityDescription = activityDescription;
     }
 }

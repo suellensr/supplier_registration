@@ -21,11 +21,11 @@ public class DocumentValidator implements ConstraintValidator<ValidDocument, Sup
 
         if (supplierCreationDTO.getPersonType() == PersonType.INDIVIDUAL) {
             if (!isValidCPF(documentNumber)) {
-                throw new InvalidDocumentException("Invalid CPF");
+                throw new InvalidDocumentException("CPF inválido");
             }
         } else if (supplierCreationDTO.getPersonType() == PersonType.COMPANY) {
             if (!isValidCNPJ(documentNumber)) {
-                throw new InvalidDocumentException("Invalid CNPJ");
+                throw new InvalidDocumentException("CNPJ inválido");
             }
         }
         return true;

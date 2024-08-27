@@ -1,7 +1,10 @@
 package edu.challengethree.supplier_registration.DTOs;
 
+import javax.validation.constraints.NotEmpty;
+
 public class AddressDTO {
 
+    @NotEmpty
     private String cep;
     private String logradouro;
     private String numero;
