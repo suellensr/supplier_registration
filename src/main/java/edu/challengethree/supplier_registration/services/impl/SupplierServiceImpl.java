@@ -3,13 +3,16 @@ package edu.challengethree.supplier_registration.services.impl;
 import edu.challengethree.supplier_registration.DTOs.SupplierCreationDTO;
 import edu.challengethree.supplier_registration.DTOs.SupplierDTO;
 import edu.challengethree.supplier_registration.DTOs.SupplierSimplifiedDTO;
+import edu.challengethree.supplier_registration.exceptions.InvalidDocumentException;
 import edu.challengethree.supplier_registration.exceptions.ResourceNotFoundException;
 import edu.challengethree.supplier_registration.exceptions.SupplierAlreadyRegisteredException;
 import edu.challengethree.supplier_registration.model.entities.Supplier;
+import edu.challengethree.supplier_registration.model.enums.PersonType;
 import edu.challengethree.supplier_registration.repositories.SupplierRepository;
 import edu.challengethree.supplier_registration.services.interfaces.SupplierService;
 import edu.challengethree.supplier_registration.services.utils.AddressMapper;
 import edu.challengethree.supplier_registration.services.utils.SupplierMapper;
+import edu.challengethree.supplier_registration.validation.DocumentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,9 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public SupplierDTO createSupplier(SupplierCreationDTO supplierCreationDTO, String userId) {
         String documentNumber = supplierCreationDTO.getDocumentNumber();
+        PersonType personType = supplierCreationDTO.getPersonType();
+
+        DocumentValidator.validateDocument(documentNumber, personType);
 
         Optional<Supplier> existingSupplier = supplierRepository.findByDocumentNumber(documentNumber);
         if (existingSupplier.isPresent()) {
@@ -42,6 +48,11 @@ public class SupplierServiceImpl implements SupplierService {
     public SupplierDTO updateSupplier(String id, String userId, SupplierCreationDTO supplierCreationDTO) throws ResourceNotFoundException {
         Supplier existingSupplier = supplierRepository.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Supplier with id " + id + " not found."));
+
+        String documentNumber = supplierCreationDTO.getDocumentNumber();
+        PersonType personType = supplierCreationDTO.getPersonType();
+
+        DocumentValidator.validateDocument(documentNumber, personType);
 
         existingSupplier.setSupplierName(supplierCreationDTO.getSupplierName());
         existingSupplier.setContactName(supplierCreationDTO.getContactName());

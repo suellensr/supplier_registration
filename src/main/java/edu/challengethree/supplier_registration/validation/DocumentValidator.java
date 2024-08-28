@@ -1,37 +1,32 @@
 package edu.challengethree.supplier_registration.validation;
 
-import edu.challengethree.supplier_registration.DTOs.SupplierCreationDTO;
 import edu.challengethree.supplier_registration.exceptions.InvalidDocumentException;
 import edu.challengethree.supplier_registration.model.enums.PersonType;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import java.util.InputMismatchException;
 
-public class DocumentValidator implements ConstraintValidator<ValidDocument, SupplierCreationDTO> {
+public class DocumentValidator {
 
-    @Override
-    public void initialize(ValidDocument constraintAnnotation) {
-    }
+    public static void validateDocument(String documentNumber, PersonType personType) {
+        boolean isValid;
 
-    @Override
-    public boolean isValid(SupplierCreationDTO supplierCreationDTO, ConstraintValidatorContext context) {
-        String documentNumber = supplierCreationDTO.getDocumentNumber()
-                                .replaceAll("\\D", ""); // Remove all non-numeric characters
-
-        if (supplierCreationDTO.getPersonType() == PersonType.INDIVIDUAL) {
-            if (!isValidCPF(documentNumber)) {
-                throw new InvalidDocumentException("CPF inválido");
-            }
-        } else if (supplierCreationDTO.getPersonType() == PersonType.COMPANY) {
-            if (!isValidCNPJ(documentNumber)) {
-                throw new InvalidDocumentException("CNPJ inválido");
-            }
+        switch (personType) {
+            case INDIVIDUAL:
+                isValid = isValidCPF(documentNumber);
+                break;
+            case COMPANY:
+                isValid = isValidCNPJ(documentNumber);
+                break;
+            default:
+                throw new IllegalArgumentException("Tipo de pessoa desconhecido.");
         }
-        return true;
+
+        if (!isValid) {
+            throw new InvalidDocumentException("Documento inválido.");
+        }
     }
 
-    private boolean isValidCPF(String cpf) {
+    private static boolean isValidCPF(String cpf) {
         // Basic CPF validation
         if (cpf == null || cpf.length() != 11 || !cpf.matches("\\d+")) {
             return false;
@@ -95,7 +90,7 @@ public class DocumentValidator implements ConstraintValidator<ValidDocument, Sup
         }
     }
 
-    private boolean isValidCNPJ(String cnpj) {
+    private static boolean isValidCNPJ(String cnpj) {
         // Basic CNPJ validation
         if (cnpj == null || cnpj.length() != 14 || !cnpj.matches("\\d+")) {
             return false;

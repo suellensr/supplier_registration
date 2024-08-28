@@ -1,7 +1,6 @@
 package edu.challengethree.supplier_registration.DTOs;
 
 import edu.challengethree.supplier_registration.model.enums.PersonType;
-import edu.challengethree.supplier_registration.validation.ValidDocument;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -10,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-@ValidDocument
+
 public class SupplierCreationDTO {
 
     @NotEmpty
@@ -25,6 +24,7 @@ public class SupplierCreationDTO {
 
     @NotNull
     private PersonType personType;
+
 
     @NotEmpty
     private String documentNumber;
