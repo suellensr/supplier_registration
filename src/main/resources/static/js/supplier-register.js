@@ -93,11 +93,10 @@ $(document).ready(function() {
                     alert('Erro ao buscar endereço. Tente novamente.');
                 }
             });
+        } else {
+            alert('CEP inválido.');
         }
     });
-
-    //Parei aqui
-
 
     // Salvar registro
     $('#supplierForm').on('submit', function(event) {

@@ -3,7 +3,6 @@ package edu.challengethree.supplier_registration.services.impl;
 import edu.challengethree.supplier_registration.DTOs.SupplierCreationDTO;
 import edu.challengethree.supplier_registration.DTOs.SupplierDTO;
 import edu.challengethree.supplier_registration.DTOs.SupplierSimplifiedDTO;
-import edu.challengethree.supplier_registration.exceptions.InvalidDocumentException;
 import edu.challengethree.supplier_registration.exceptions.ResourceNotFoundException;
 import edu.challengethree.supplier_registration.exceptions.SupplierAlreadyRegisteredException;
 import edu.challengethree.supplier_registration.model.entities.Supplier;
@@ -28,7 +27,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public SupplierDTO createSupplier(SupplierCreationDTO supplierCreationDTO, String userId) {
-        String documentNumber = supplierCreationDTO.getDocumentNumber();
+        String documentNumber = supplierCreationDTO.getDocumentNumber().replaceAll("\\D", "");;
         PersonType personType = supplierCreationDTO.getPersonType();
 
         DocumentValidator.validateDocument(documentNumber, personType);
