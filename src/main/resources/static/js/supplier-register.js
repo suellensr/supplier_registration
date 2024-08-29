@@ -78,7 +78,7 @@ $(document).ready(function() {
             $.ajax({
                 url: `https://viacep.com.br/ws/${cep}/json/`,
                 type: 'GET',
-                success: function(data) {
+                success: function (data) {
                     if (!data.erro) {
                         $('#logradouro').val(data.logradouro);
                         $('#bairro').val(data.bairro);
@@ -87,20 +87,30 @@ $(document).ready(function() {
                         $('#pais').val('Brasil'); // Preenche o país como Brasil, mas posso tirar
                     } else {
                         alert('CEP não encontrado.');
+                        clearAddressFields();
                     }
                 },
-                error: function() {
+                error: function () {
                     alert('Erro ao buscar endereço. Tente novamente.');
+                    clearAddressFields();
                 }
             });
         } else {
-            alert('CEP inválido.');
+            clearAddressFields();
         }
     });
 
     // Salvar registro
     $('#supplierForm').on('submit', function(event) {
         event.preventDefault(); // Evita o comportamento padrão de submissão do formulário
+
+        // Verifica se o CEP tem 8 dígitos antes de enviar o formulário
+        const cep = $('#cep').val().replace(/\D/g, ''); // Remove caracteres não numéricos
+        if (cep.length !== 8) {
+            alert('CEP inválido. O formulário não pode ser enviado.');
+            return;
+        }
+
         console.log($('#localidade').val())
         console.log($('#uf').val())
         console.log($('#personType').val())
@@ -195,4 +205,13 @@ function applyPhoneMasks() {
             $(this).mask('+00 (00) 00000-0000');
         }
     });
+}
+
+// Limpar campos de endereço
+function clearAddressFields() {
+    $('#logradouro').val('');
+    $('#bairro').val('');
+    $('#localidade').val('');
+    $('#uf').val('');
+    $('#pais').val('');
 }
