@@ -187,7 +187,7 @@ function validateToken(callback) {
 // Função global para aplicar a máscara ao campo de documento
 function applyDocumentMask() {
     $('#documentNumber').mask(function () {
-        return $('#personType').val() === 'COMPANY' ? '00.000.000/0000-00' : '000.000.000-00';
+        return $('#personType').val() === 'COMPANY' ? '00.000.000/0000-00' : '000.000.000-00'
     });
 }
 

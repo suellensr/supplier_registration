@@ -191,7 +191,7 @@ function loadSupplierDetails() {
                 $('#contactPhones').append(`
                     <div class="input-group mt-2 mb-2">
                         <span class="input-group-text"><i class="bi ${phoneTypeIcon}"></i></span>
-                        <input type="text" class="form-control phone-input" name="phones[]" value="${phone}" readonly>
+                        <input type="text" class="form-control phone-input" name="phones[]" value="${phone}">
                         <div class="input-group-append">
                             <button class="btn btn-danger remove-phone" type="button"><i class="bi bi-trash"></i></button>
                         </div>

@@ -99,6 +99,14 @@ function deleteSupplier() {
     }
 }
 
+function editSupplier() {
+    var supplierId = $('#supplierId').val(); // Obtém o ID do input oculto
+    console.log('Supplier ID:', supplierId);
+
+    window.location.href = '/edit-supplier/' + supplierId;
+}
+
+
 function applyDocumentMask() {
     $('#documentNumber').mask(function () {
         return $('#personType').val() === 'COMPANY' ? '00.000.000/0000-00' : '000.000.000-00';

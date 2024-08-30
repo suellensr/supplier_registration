@@ -27,7 +27,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public SupplierDTO createSupplier(SupplierCreationDTO supplierCreationDTO, String userId) {
-        String documentNumber = supplierCreationDTO.getDocumentNumber().replaceAll("\\D", "");;
+        String documentNumber = supplierCreationDTO.getDocumentNumber().replaceAll("\\D", "");
         PersonType personType = supplierCreationDTO.getPersonType();
 
         DocumentValidator.validateDocument(documentNumber, personType);
@@ -48,7 +48,7 @@ public class SupplierServiceImpl implements SupplierService {
         Supplier existingSupplier = supplierRepository.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Supplier with id " + id + " not found."));
 
-        String documentNumber = supplierCreationDTO.getDocumentNumber();
+        String documentNumber = supplierCreationDTO.getDocumentNumber().replaceAll("\\D", "");
         PersonType personType = supplierCreationDTO.getPersonType();
 
         DocumentValidator.validateDocument(documentNumber, personType);
