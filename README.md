@@ -96,10 +96,9 @@ mvn spring-boot:run
   },
   "activityDescription": "Descrição da atividade"
 }
-Resposta:
+```
+**Resposta:**
 
-json
-Copiar código
 {
   "id": "unique-id",
   "supplierName": "Fornecedor Exemplo",
@@ -120,8 +119,9 @@ Copiar código
   },
   "activityDescription": "Descrição da atividade"
 }
-Frontend
-Página de Login
+
+## Frontend
+# Página de Login
 
 URL: /login
 Descrição: Página para autenticação de usuários.
@@ -134,22 +134,6 @@ Página de Visualização de Fornecedor
 URL: /view-supplier/{id}
 Descrição: Página para visualizar os detalhes de um fornecedor específico.
 Estrutura do Projeto
-Backend
-/src/main/java/edu/challengethree/supplier_registration
-AuthenticationController.java: Controlador para autenticação e gerenciamento de usuários.
-SupplierController.java: Controlador para operações relacionadas aos fornecedores.
-PagesController.java: Controlador para páginas HTML e navegação no frontend.
-Frontend
-/src/main/resources/templates
-
-login.html: Página de login.
-supplier-register.html: Página de cadastro de fornecedor.
-view-supplier.html: Página para visualizar detalhes do fornecedor.
-edit-supplier.html: Página para editar fornecedores existentes.
-home.html: Página inicial após login.
-/src/main/resources/static/js
-
-main.js: Script JavaScript para interações de frontend, incluindo máscaras de input e validação de tokens.
 
 ## Testes
 Execute os testes unitários com o Maven:
