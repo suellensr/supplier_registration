@@ -13,16 +13,17 @@ Spring Boot e um frontend com Thymeleaf e JavaScript.
 
 ## Instalação
 ### Pré-requisitos
-Java 11
-Maven
-Docker (para a configuração do MongoDB)
-Passos para Instalação
-Clonar o Repositório
+- Java 11
+- Maven
+- Docker (para a configuração do MongoDB)
 
-bash
-Copiar código
+## Passos para Instalação
+### Clonar o Repositório
+´´´
 git clone https://github.com/seu-usuario/supplier_registration.git
 cd supplier_registration
+´´´
+
 Configuração do MongoDB com Docker
 
 Para iniciar o MongoDB, use o docker-compose:
