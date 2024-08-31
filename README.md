@@ -19,10 +19,10 @@ Spring Boot e um frontend com Thymeleaf e JavaScript.
 
 ## Passos para Instalação
 ### Clonar o Repositório
-´´´
+'''
 git clone https://github.com/seu-usuario/supplier_registration.git
 cd supplier_registration
-´´´
+'''
 
 Configuração do MongoDB com Docker
 
