@@ -19,82 +19,64 @@ Spring Boot e um frontend com Thymeleaf e JavaScript.
 
 ## Passos para Instalação
 ### Clonar o Repositório
-'''
+```
 git clone https://github.com/seu-usuario/supplier_registration.git
 cd supplier_registration
-'''
+```
 
-Configuração do MongoDB com Docker
+### Configuração do MongoDB com Docker
 
 Para iniciar o MongoDB, use o docker-compose:
 
-bash
-Copiar código
+```
 docker-compose up -d
+```
 Isso irá configurar o MongoDB com as credenciais especificadas no docker-compose.yml.
 
-Configuração do Ambiente
 
-Crie um arquivo application.properties na pasta src/main/resources com o seguinte conteúdo:
-
-properties
-Copiar código
-spring.application.name=supplier_registration
-spring.data.mongodb.database=supplier-database
-spring.data.mongodb.uri=mongodb://admin:admin1234@localhost:27017/
-api.security.token.secret=${JWT_SECRET:my-secret-key}
-Instalação das Dependências
+### Instalação das Dependências
 
 Utilize o Maven para instalar as dependências:
 
-bash
-Copiar código
+```
 mvn install
-Executar a Aplicação
+```
+
+## Executar a Aplicação
 
 Para iniciar o servidor Spring Boot:
 
-bash
-Copiar código
+```
 mvn spring-boot:run
-Uso
-API
-Endpoint de Login
+```
+## Uso
+### API
+- **Endpoint de Login**
 
-URL: /auth/login
-
-Método: POST
-
-Corpo da Requisição:
-
-json
-Copiar código
+- URL: /auth/login
+- Método: POST
+- Corpo da Requisição:
+```
 {
   "email": "usuario@example.com",
   "password": "senha"
 }
-Resposta:
+```
+** Resposta:** 
 
-json
-Copiar código
 {
   "token": "jwt-token"
 }
-Endpoint de Registro de Fornecedor
 
-URL: /supplier-register
+## Endpoint de Registro de Fornecedor
 
-Método: POST
+- URL: /supplier-register
+- Método: POST
+- Cabeçalhos:
+     Authorization: Bearer <jwt-token>
 
-Cabeçalhos:
-
-text
-Copiar código
-Authorization: Bearer <jwt-token>
-Corpo da Requisição:
-
-json
-Copiar código
+- Corpo da Requisição:
+```
 {
   "supplierName": "Fornecedor Exemplo",
   "contactName": "Contato Exemplo",
@@ -168,21 +150,18 @@ home.html: Página inicial após login.
 /src/main/resources/static/js
 
 main.js: Script JavaScript para interações de frontend, incluindo máscaras de input e validação de tokens.
-Testes
+
+## Testes
 Execute os testes unitários com o Maven:
 
 bash
 Copiar código
 mvn test
-Contribuição
-Contribuições são bem-vindas! Se você encontrar um bug ou tiver uma melhoria para sugerir, sinta-se à vontade para abrir uma issue ou enviar um pull request.
 
-Licença
-Este projeto está licenciado sob a MIT License.
+## Autores
+Suellen S. Reis
 
-Autores
-Seu Nome
-Referências
-Spring Boot Documentation
-MongoDB Documentation
-Thymeleaf Documentation
+## Referências
+- Spring Boot Documentation
+- MongoDB Documentation
+- Thymeleaf Documentation
